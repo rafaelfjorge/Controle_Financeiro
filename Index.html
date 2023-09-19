@@ -65,18 +65,18 @@
                         </select>
                     </td>
                     <td><input type="number" min="1" max="31"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
-                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
+                    <td><input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00"></td>
                 </tr>
                 <tr>
                     <td colspan="14">
@@ -88,7 +88,67 @@
         </table>
     </form>
     
-    <div id="result">
+    <!-- Tabela de Resultados -->
+    <table>
+        <thead>
+            <tr>
+                <th>Mês</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>JANEIRO</td>
+                <td id="totalJan">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>FEVEREIRO</td>
+                <td id="totalFev">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>MARÇO</td>
+                <td id="totalMar">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>ABRIL</td>
+                <td id="totalAbr">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>MAIO</td>
+                <td id="totalMai">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>JUNHO</td>
+                <td id="totalJun">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>JULHO</td>
+                <td id="totalJul">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>AGOSTO</td>
+                <td id="totalAgo">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>SETEMBRO</td>
+                <td id="totalSet">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>OUTUBRO</td>
+                <td id="totalOut">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>NOVEMBRO</td>
+                <td id="totalNov">R$ 0.00</td>
+            </tr>
+            <tr>
+                <td>DEZEMBRO</td>
+                <td id="totalDez">R$ 0.00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <div id="result">
         <p>Total Jan: <span id="totalJan">R$ 0.00</span></p>
         <p>Total Fev: <span id="totalFev">R$ 0.00</span></p>
         <p>Total Mar: <span id="totalMar">R$ 0.00</span></p>
@@ -101,7 +161,7 @@
         <p>Total Out: <span id="totalOut">R$ 0.00</span></p>
         <p>Total Nov: <span id="totalNov">R$ 0.00</span></p>
         <p>Total Dez: <span id="totalDez">R$ 0.00</span></p>
-    </div>
+    </div> -->
 
     <script>
         function addRow() {
@@ -133,9 +193,14 @@
                 } else if (i === 1) {
                     cells[i].innerHTML = '<input type="number" min="1" max="31">';
                 } else {
-                    cells[i].innerHTML = '<input type="number" min="0" step="0.01">';
+                    cells[i].innerHTML = `<input type="text" onblur="formatCurrency(this)" placeholder="R$ 0,00">`;
                 }
             }
+        }
+
+        function formatCurrency(input) {
+            const value = parseFloat(input.value.replace('R$', '').replace(',', '.')) || 0;
+            input.value = `R$ ${value.toFixed(2).replace('.', ',')}`;
         }
 
         function calculateTotal() {
@@ -176,7 +241,7 @@
 
                     cells.forEach((cell, cellIndex) => {
                         if (cellIndex >= 2) { // Comece a partir da terceira coluna (Janeiro)
-                            const inputValue = parseFloat(cell.querySelector('input').value) || 0;
+                            const inputValue = parseFloat(cell.querySelector('input').value.replace('R$', '').replace(',', '.')) || 0;
 
                             switch (months[cellIndex - 2]) {
                                 case 'JANEIRO':
@@ -236,7 +301,6 @@
             totalNov.textContent = `R$ ${totalNovValue.toFixed(2)}`;
             totalDez.textContent = `R$ ${totalDezValue.toFixed(2)}`;
         }
-
     </script>
 </body>
 </html>
