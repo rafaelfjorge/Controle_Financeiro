@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th, td {
+            padding: 10px;
+        }
+        select, input {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Controle Financeiro</h1>
+    <form id="financeForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Vencimento</th>
+                    <th>JANEIRO</th>
+                    <th>FEVEREIRO</th>
+                    <th>MARÇO</th>
+                    <th>ABRIL</th>
+                    <th>MAIO</th>
+                    <th>JUNHO</th>
+                    <th>JULHO</th>
+                    <th>AGOSTO</th>
+                    <th>SETEMBRO</th>
+                    <th>OUTUBRO</th>
+                    <th>NOVEMBRO</th>
+                    <th>DEZEMBRO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select>
+                            <option value="Aluguel">Aluguel</option>
+                            <option value="Condominio">Condominio</option>
+                            <option value="Nubank">Nubank</option>
+                            <option value="Digio">Digio</option>
+                            <option value="Disney+StarPluz+ML+HBO">Disney+StarPluz+ML+HBO</option>
+                            <option value="Amazon">Amazon</option>
+                            <option value="Vivo">Vivo</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Luz">Luz</option>
+                            <option value="Academia">Academia</option>
+                            <option value="NetFlix">NetFlix</option>
+                            <option value="Diversos">Diversos</option>
+                            <option value="Lic. Veiculo/Multas">Lic. Veiculo/Multas</option>
+                            <option value="Mercado">Mercado</option>
+                        </select>
+                    </td>
+                    <td><input type="number" min="1" max="31"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                    <td><input type="number" min="0" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td colspan="14">
+                        <button type="button" onclick="addRow()">Adicionar Linha</button>
+                        <button type="button" onclick="calculateTotal()">Calcular</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    
+    <div id="result">
+        <p>Total Jan: <span id="totalJan">R$ 0.00</span></p>
+        <p>Total Fev: <span id="totalFev">R$ 0.00</span></p>
+        <p>Total Mar: <span id="totalMar">R$ 0.00</span></p>
+        <p>Total Abr: <span id="totalAbr">R$ 0.00</span></p>
+        <p>Total Mai: <span id="totalMai">R$ 0.00</span></p>
+        <p>Total Jun: <span id="totalJun">R$ 0.00</span></p>
+        <p>Total Jul: <span id="totalJul">R$ 0.00</span></p>
+        <p>Total Ago: <span id="totalAgo">R$ 0.00</span></p>
+        <p>Total Set: <span id="totalSet">R$ 0.00</span></p>
+        <p>Total Out: <span id="totalOut">R$ 0.00</span></p>
+        <p>Total Nov: <span id="totalNov">R$ 0.00</span></p>
+        <p>Total Dez: <span id="totalDez">R$ 0.00</span></p>
+    </div>
+
+    <script>
+        function addRow() {
+            const tableBody = document.querySelector('tbody');
+            const newRow = tableBody.insertRow(tableBody.rows.length - 1); // Insere antes da última linha
+            const cells = [];
+
+            for (let i = 0; i < 14; i++) {
+                cells[i] = newRow.insertCell(i);
+                if (i === 0) {
+                    cells[i].innerHTML = `
+                        <select>
+                            <option value="Aluguel">Aluguel</option>
+                            <option value="Condominio">Condominio</option>
+                            <option value="Nubank">Nubank</option>
+                            <option value="Digio">Digio</option>
+                            <option value="Disney+StarPluz+ML+HBO">Disney+StarPluz+ML+HBO</option>
+                            <option value="Amazon">Amazon</option>
+                            <option value="Vivo">Vivo</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Luz">Luz</option>
+                            <option value="Academia">Academia</option>
+                            <option value="NetFlix">NetFlix</option>
+                            <option value="Diversos">Diversos</option>
+                            <option value="Lic. Veiculo/Multas">Lic. Veiculo/Multas</option>
+                            <option value="Mercado">Mercado</option>
+                        </select>
+                    `;
+                } else if (i === 1) {
+                    cells[i].innerHTML = '<input type="number" min="1" max="31">';
+                } else {
+                    cells[i].innerHTML = '<input type="number" min="0" step="0.01">';
+                }
+            }
+        }
+
+        function calculateTotal() {
+            const months = ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO', 'JULHO', 'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'];
+
+            // Inicialize os totais de cada mês
+            const totalJan = document.getElementById('totalJan');
+            const totalFev = document.getElementById('totalFev');
+            const totalMar = document.getElementById('totalMar');
+            const totalAbr = document.getElementById('totalAbr');
+            const totalMai = document.getElementById('totalMai');
+            const totalJun = document.getElementById('totalJun');
+            const totalJul = document.getElementById('totalJul');
+            const totalAgo = document.getElementById('totalAgo');
+            const totalSet = document.getElementById('totalSet');
+            const totalOut = document.getElementById('totalOut');
+            const totalNov = document.getElementById('totalNov');
+            const totalDez = document.getElementById('totalDez');
+
+            let totalJanValue = 0;
+            let totalFevValue = 0;
+            let totalMarValue = 0;
+            let totalAbrValue = 0;
+            let totalMaiValue = 0;
+            let totalJunValue = 0;
+            let totalJulValue = 0;
+            let totalAgoValue = 0;
+            let totalSetValue = 0;
+            let totalOutValue = 0;
+            let totalNovValue = 0;
+            let totalDezValue = 0;
+
+            const tableRows = document.querySelectorAll('tbody tr');
+
+            tableRows.forEach((row, rowIndex) => {
+                if (rowIndex !== tableRows.length - 1) { // Exclua a última linha dos botões
+                    const cells = row.querySelectorAll('td');
+
+                    cells.forEach((cell, cellIndex) => {
+                        if (cellIndex >= 2) { // Comece a partir da terceira coluna (Janeiro)
+                            const inputValue = parseFloat(cell.querySelector('input').value) || 0;
+
+                            switch (months[cellIndex - 2]) {
+                                case 'JANEIRO':
+                                    totalJanValue += inputValue;
+                                    break;
+                                case 'FEVEREIRO':
+                                    totalFevValue += inputValue;
+                                    break;
+                                case 'MARÇO':
+                                    totalMarValue += inputValue;
+                                    break;
+                                case 'ABRIL':
+                                    totalAbrValue += inputValue;
+                                    break;
+                                case 'MAIO':
+                                    totalMaiValue += inputValue;
+                                    break;
+                                case 'JUNHO':
+                                    totalJunValue += inputValue;
+                                    break;
+                                case 'JULHO':
+                                    totalJulValue += inputValue;
+                                    break;
+                                case 'AGOSTO':
+                                    totalAgoValue += inputValue;
+                                    break;
+                                case 'SETEMBRO':
+                                    totalSetValue += inputValue;
+                                    break;
+                                case 'OUTUBRO':
+                                    totalOutValue += inputValue;
+                                    break;
+                                case 'NOVEMBRO':
+                                    totalNovValue += inputValue;
+                                    break;
+                                case 'DEZEMBRO':
+                                    totalDezValue += inputValue;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+                }
+            });
+
+            totalJan.textContent = `R$ ${totalJanValue.toFixed(2)}`;
+            totalFev.textContent = `R$ ${totalFevValue.toFixed(2)}`;
+            totalMar.textContent = `R$ ${totalMarValue.toFixed(2)}`;
+            totalAbr.textContent = `R$ ${totalAbrValue.toFixed(2)}`;
+            totalMai.textContent = `R$ ${totalMaiValue.toFixed(2)}`;
+            totalJun.textContent = `R$ ${totalJunValue.toFixed(2)}`;
+            totalJul.textContent = `R$ ${totalJulValue.toFixed(2)}`;
+            totalAgo.textContent = `R$ ${totalAgoValue.toFixed(2)}`;
+            totalSet.textContent = `R$ ${totalSetValue.toFixed(2)}`;
+            totalOut.textContent = `R$ ${totalOutValue.toFixed(2)}`;
+            totalNov.textContent = `R$ ${totalNovValue.toFixed(2)}`;
+            totalDez.textContent = `R$ ${totalDezValue.toFixed(2)}`;
+        }
+
+    </script>
+</body>
+</html>
