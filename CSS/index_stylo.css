@@ -1,0 +1,176 @@
+/* Estilo para a página de login */
+body {
+    background-color: #706b6b;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: #f1f0f0; 
+    border-radius: px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 30px;
+    width: 300px;
+}
+
+.login-container h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+.login-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border: 2px solid #a17a7a;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.login-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+/* {
+    font-family: Arial;
+} */
+
+
+nav a 
+{
+    color: #ffffff;
+    text-decoration: none; /*Isso serve para deixar efeito de sublinhado no texto */
+    font-weight: bold;     /*Isso serve para deixar efeito de sublinhado no texto */
+    text-transform: uppercase;  /*Deixa tudo maiusculo */
+    font-size: 14px;   /*Isso serve para deixar efeito de sublinhado no texto */
+}
+
+nav a:hover
+{
+    text-decoration: underline; /*Isso serve para deixar efeito de sublinhado no texto */
+}
+
+h1
+{ /* H1 de todas as paginas*/
+    color: #9fa396;;
+    background-color: #ffffff;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 15px;
+    width: 200px; /*Isso define largura*/
+    border-left: 10px solid #9fa396; /*Isso define borda esquerda*/
+    border-right: 10px solid #9fa396; /*Isso define borda Direira*/
+    border-top: 2px solid #9fa396; /*Isso define borda Topo*/
+    border-bottom: 2px solid #9fa396; /*Isso define borda de baixo*/
+    border-radius: 30px; /*Isso faz ele arredondado*/
+}
+/*O Div não alinha com o text-align se ela esta no Body, pq ele já alinha normal, ai usa-se o comendo abaixo pára alinhar o h1 e Div*/
+h1, 
+div#infoMessage,
+fieldset,
+table /*Posso chamar ele aqui para não ter q copiar as mnargens na div#infoMessage*/
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#infoMessage 
+/*Formata somente a ID q eu passe na Div, se não usar precisa passar a Id assim*/
+{
+    background-color: #ffcc00;
+    width: 400px;
+    border-radius: 5px; /*Arredonda os cantos*/
+    padding: 10px; /*Espaçamento entre o texto e a borda do elemento*/
+    color: #d40000;
+}
+
+fieldset
+{
+    background-color: #ffffff;
+    width: 400px;
+    text-align: left;
+    border-radius: 5px;
+    border: 0px;
+}
+
+legend
+{
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding-top: 5px; /*Afasta a legenda do fieldSet*/
+    padding-right: 7px;
+    font-weight: bolder;
+}
+
+legend,
+label
+{
+    color: #8d02ae;
+}
+
+input[type=button],
+input[type=submit]
+{
+    background-color: #8bbf18;
+    border-bottom: 3px solid #5b7b1b;
+    border-top: 1px solid #5b7b1b;
+    border-left: 1px solid #5b7b1b;
+    border-right: 1px solid #5b7b1b;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 5px 8 px; /*Lateral e abaixo*/
+}
+
+input[type=button]:hover,
+input[type=submit]:hover
+{
+    /*Efeito que troca a cor quando passa o mouse*/
+    background-color: #a0de1c;
+    border-bottom: 3px solid #5b7b1b; /*Quando passa o mouse ele muda a cor para a cor informada aqui*/
+}
+
+table
+{
+    background-color: #ffffff;
+    font-size: 14px;
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+
+th
+{
+    background-color: #5b7b1d;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 3px;
+}
+
+/*Isso faz que o Th do Tr recebe cores diferentes*/
+tr:nth-child(even)
+{
+    background-color: #f3e6f7;
+}
+tr:nth-child(odd)
+{
+    background-color: #ffffff;
+}
